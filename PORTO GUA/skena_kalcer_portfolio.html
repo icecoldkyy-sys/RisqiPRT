@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTOFOLIO RISQI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Space Grotesk & Syne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'skena-bg': '#0F0F11',
+                        'skena-card': '#18181C',
+                        'acid-lime': '#D4FF00',
+                        'hot-pink': '#FF007A',
+                        'vintage-cream': '#F2EFE9',
+                        'terracotta': '#FF5E36',
+                        'electric-blue': '#00E5FF'
+                    },
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        space: ['Space Grotesk', 'sans-serif'],
+                        jakarta: ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'brutal': '5px 5px 0px #D4FF00',
+                        'brutal-pink': '5px 5px 0px #FF007A',
+                        'brutal-white': '5px 5px 0px #F2EFE9',
+                        'brutal-lg': '8px 8px 0px #D4FF00',
+                        'brutal-lg-pink': '8px 8px 0px #FF007A',
+                    },
+                    animation: {
+                        'marquee': 'marquee 20s linear infinite',
+                        'marquee-reverse': 'marquee-reverse 20s linear infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite alternate',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        'marquee-reverse': {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0%)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-10px) rotate(2deg)' }
+                        },
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(212, 255, 0, 0.3)' },
+                            '100%': { boxShadow: '0 0 35px rgba(212, 255, 0, 0.8)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0F0F11;
+            color: #F2EFE9;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Grain Effect Overlay */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Brutalist Border Styling */
+        .brutal-border {
+            border: 2.5px solid #18181C;
+        }
+        .dark .brutal-border {
+            border: 2.5px solid #F2EFE9;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F0F11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4FF00;
+            border: 2px solid #0F0F11;
+            border-radius: 4px;
+        }
+
+        /* Sticker Rotation Helpers */
+        .rotate-neg-3 { transform: rotate(-3deg); }
+        .rotate-pos-3 { transform: rotate(3deg); }
+        .rotate-neg-6 { transform: rotate(-6deg); }
+        .rotate-pos-6 { transform: rotate(6deg); }
+    </style>
+</head>
+<body class="selection:bg-acid-lime selection:text-black">
+
+    <!-- Grain Texture Overlay -->
+    <div class="grain-overlay"></div>
+
+    <!-- Hidden File Input for Image Uploading -->
+    <input type="file" id="globalFileInput" accept="image/*" class="hidden" onchange="handleFileSelected(event)">
+
+    <!-- NAV BAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-skena-bg/90 backdrop-blur-md border-b-2 border-vintage-cream/20 px-4 lg:px-12 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="bg-acid-lime text-black font-syne font-extrabold text-xl px-2 py-0.5 rounded transform -rotate-3 group-hover:rotate-0 transition-transform shadow-brutal">
+                    MOCHAMMAD
+                </span>
+                <span class="font-syne font-extrabold text-2xl tracking-tighter text-vintage-cream group-hover:text-acid-lime transition-colors">
+                    RISQI FATAHILAH<span class="text-hot-pink">.</span>
+                </span>
+            </a>
+
+            <!-- Nav Links -->
+            <div class="hidden md:flex items-center gap-6 font-bold uppercase text-sm tracking-wider">
+                <a href="#about" class="hover:text-acid-lime transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-acid-lime hover:after:w-full after:transition-all">Tentang Saya</a>
+                <a href="#project" class="hover:text-acid-lime transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-acid-lime hover:after:w-full after:transition-all">Project</a>
+                <a href="#pkl" class="hover:text-acid-lime transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-acid-lime hover:after:w-full after:transition-all">Pengalaman PKL</a>
+                <a href="#prestasi" class="hover:text-acid-lime transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-acid-lime hover:after:w-full after:transition-all">Prestasi</a>
+            </div>
+
+            <!-- CTA Mobile/Desktop Button -->
+            <a href="https://www.instagram.com/mrisfthh?xtok=MXYzeHU2eGYwZzFqYg==" class="bg-hot-pink hover:bg-hot-pink/90 text-white font-syne font-bold px-4 py-2 rounded-lg border-2 border-vintage-cream shadow-brutal hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-xs md:text-sm uppercase tracking-wider flex items-center gap-2">
+                <span>MY INSTAGRAM</span>
+                <i class="fa-solid => fa-arrow-right -rotate-45"></i>
+            </a>    
+        </div>
+    </nav>
+
+    <!-- MARQUEE RUNNING TEXT HEADER -->
+    <div class="mt-16 bg-acid-lime text-black font-syne font-extrabold text-sm md:text-base py-2.5 overflow-hidden border-y-2 border-black rotate-1 scale-105 z-20 relative">
+        <div class="whitespace-nowrap flex animate-marquee gap-8">
+            <span>⚡ MOCHAMMAD RISQI FATAHILAH</span>
+            <span>•</span>
+            <span>JUARA BADMINTON POSMAD</span>
+            <span>•</span>
+            <span>PKL PT CIPTA MANDIRI WIRASAKTI</span>
+            <span>•</span>
+            <span>SMK BINA MANDIRI MULTIMEDIA</span>
+            <span>•</span>
+            <span>REKAYASA PERANGKAT LUNAK</span>
+            <span>•</span>
+            <span>⚡ CREATIVE KALCER PORTFOLIO</span>
+            <span>•</span>
+            <span>JUARA BADMINTON POSMAD</span>
+            <span>•</span>
+            <span>PKL PT CIPTA MANDIRI WIRASAKTI</span>
+            <span>•</span>
+            <span>NOW XII RPL 1</span>
+            <span>•</span>
+        </div>
+    </div>
+
+    <!-- 1. HERO SECTION -->
+    <section class="min-h-screen pt-10 pb-20 px-4 lg:px-12 max-w-7xl mx-auto flex flex-col justify-center relative">
+        
+        <!-- Background Decorative Floating Stickers -->
+        <div class="absolute top-20 right-10 hidden lg:block animate-float">
+            <span class="bg-terracotta text-white font-bold px-4 py-2 rounded-full border-2 border-vintage-cream shadow-brutal rotate-pos-6 text-sm uppercase tracking-widest inline-block">
+                🔥 KALCER APPROVED
+            </span>
+        </div>
+        <div class="absolute bottom-20 left-4 hidden lg:block animate-float" style="animation-delay: 1.5s;">
+            <span class="bg-electric-blue text-black font-bold px-4 py-2 rounded-full border-2 border-vintage-cream shadow-brutal rotate-neg-6 text-sm uppercase tracking-widest inline-block">
+                🏸 BADMINTON CHAMP
+            </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Column: Hero Text -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Retro Badge -->
+                <div class="inline-flex items-center gap-2 bg-skena-card border-2 border-acid-lime px-3 py-1.5 rounded-md shadow-brutal">
+                    <span class="w-2.5 h-2.5 rounded-full bg-acid-lime animate-pulse"></span>
+                    <span class="text-xs font-mono uppercase tracking-widest text-acid-lime">READY FOR NEW OPPORTUNITIES</span>
+                </div>
+
+                <!-- Big Headline -->
+                <h1 class="font-syne text-4xl sm:text-6xl md:text-7xl font-extrabold leading-none tracking-tight">
+                    HAI, SAYA <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-acid-lime via-vintage-cream to-hot-pink">
+                        M RISQI
+                    </span> <br>
+                    FATAHILAH<span class="text-acid-lime">.</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-vintage-cream/80 max-w-xl font-jakarta leading-relaxed">
+                    Selamat datang di playground digital saya. Kombinasi passion di dunia teknikal/kreatif, disiplin atlet badminton, dan pengalaman profesional pkl, serta penguasaan ilmu basic Software.
+                </p>
+
+                <!-- Tag Badges -->
+                <div class="flex flex-wrap gap-2 pt-2">
+                    <span class="bg-vintage-cream text-black font-extrabold px-3 py-1 rounded border-2 border-black text-xs uppercase shadow-brutal rotate-neg-3">#BaddieEnergy</span>
+                    <span class="bg-hot-pink text-white font-extrabold px-3 py-1 rounded border-2 border-black text-xs uppercase shadow-brutal rotate-pos-3">#StreetwearVibe</span>
+                    <span class="bg-acid-lime text-black font-extrabold px-3 py-1 rounded border-2 border-black text-xs uppercase shadow-brutal rotate-neg-3">#BadmintonPlayer</span>
+                </div>
+
+                <!-- Call To Actions -->
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#project" class="bg-acid-lime hover:bg-acid-lime/90 text-black font-syne font-extrabold text-lg px-8 py-4 rounded-xl border-2 border-vintage-cream shadow-brutal hover:translate-x-1 hover:translate-y-1 transition-all flex items-center gap-3">
+                        <span>LIHAT WORK SAYA</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    <a href="#contact" class="bg-skena-card hover:bg-vintage-cream hover:text-black text-vintage-cream font-syne font-bold text-lg px-8 py-4 rounded-xl border-2 border-vintage-cream shadow-brutal-white hover:translate-x-1 hover:translate-y-1 transition-all">
+                        LET'S TALK
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Column: Profile Image Frame ("FOTO GUA") -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-md group">
+                    
+                    <!-- Vinyl Record Decoration Behind -->
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-black rounded-full border-4 border-zinc-800 flex items-center justify-center animate-spin-slow opacity-80 z-0 hidden sm:flex">
+                        <div class="w-10 h-10 rounded-full border-4 border-acid-lime bg-black"></div>
+                    </div>
+
+                    <!-- Polaroid/Skena Frame Wrapper -->
+                    <div class="relative z-10 bg-vintage-cream text-black p-4 pb-6 rounded-2xl border-4 border-black shadow-brutal-lg-pink transform group-hover:rotate-1 transition-transform duration-300">
+                        
+                        <!-- Top Tape Effect -->
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-acid-lime/80 border border-black transform -rotate-2 opacity-90 z-20"></div>
+
+                        <!-- Image Container -->
+                        <div class="relative aspect-[4/5] bg-zinc-900 rounded-lg overflow-hidden border-2 border-black group/img">
+                            
+                            <!-- 
+                                =========================================================
+                                [INSTRUKSI PEMAKAIAN FOTO PROFIL (FOTO GUA)]
+                                Ganti atribut src="..." di bawah ini dengan URL foto kamu!
+                                Atau gunakan tombol "Ganti Gambar" saat preview web berjalan.
+                                =========================================================
+                            -->
+                            <img id="img-profile" 
+                                 src="RIPIT.jpeg" 
+                                 alt="Foto Profil Gua" 
+                                 class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer"
+                                 onclick="openModal(this.src, 'Foto Profil Utama')">
+
+                            <!-- Image Action Controls Overlay -->
+                            
+                            <!-- Floating Sticker Badge -->
+                            <div class="absolute top-3 left-3 bg-hot-pink text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded border border-black shadow-brutal">
+                                📸 MAIN PROFILE
+                            </div>
+                        </div>
+
+                        <!-- Polaroid Text Bottom -->
+                        <div class="mt-4 text-center font-syne">
+                            <h3 class="text-xl font-extrabold tracking-tight uppercase">MY AUTHENTIC SELF</h3>
+                            <p class="text-xs font-mono text-zinc-600">JAKARTA, IDN • SKENA ARCHIVE #001</p>
+                        </div>
+                    </div>
+
+                    <!-- Decorative Tag Bottom Left -->
+                    <div class="absolute -bottom-4 -left-4 z-20 bg-acid-lime text-black font-extrabold px-4 py-2 rounded-lg border-2 border-black shadow-brutal rotate-neg-6 text-xs uppercase">
+                        ⚡ ORIGINAL BADASS
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 2. SECTION TENTANG GUA (ABOUT ME) -->
+    <section id="about" class="py-20 px-4 lg:px-12 bg-skena-card border-y-2 border-vintage-cream/20 relative">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <span class="text-acid-lime font-mono text-sm uppercase tracking-widest">// SECTION 01</span>
+                    <h2 class="font-syne text-4xl md:text-5xl font-extrabold tracking-tight mt-1">
+                        TENTANG SAYA<span class="text-hot-pink">.</span>
+                    </h2>
+                </div>
+                <p class="text-vintage-cream/70 font-mono text-sm max-w-sm">
+                    Gak sekadar gaya, tapi punya mindset kerja keras & skill yang nyata.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Bio -->
+                <div class="md:col-span-2 bg-skena-bg p-8 rounded-2xl border-2 border-vintage-cream/30 shadow-brutal relative overflow-hidden group hover:border-acid-lime transition-all">
+                    <div class="absolute -right-10 -bottom-10 text-zinc-800/20 text-9xl font-syne font-black pointer-events-none">
+                        BIO
+                    </div>
+                    
+                    <h3 class="text-2xl font-syne font-bold text-acid-lime mb-4 flex items-center gap-3">
+                        <i class="fa-solid fa-bolt"></i> HIGH ENERGY & DISCIPLINED
+                    </h3>
+                    <p class="text-vintage-cream/90 text-lg leading-relaxed font-jakarta mb-6">
+                        Saya adalah tipe individu yang fleksibel tapi super kompetitif. Terbiasa dengan ritme kerja yang presisi hasil dari kedisiplinan sebagai atlet <span class="text-acid-lime font-bold">Badminton POSMAD</span> dan ketelitian teknis yang teruji saat menjalani program <span class="text-hot-pink font-bold">PKL di PT Cipta Mandiri Wirasakti</span>.
+                    </p>
+                    <p class="text-vintage-cream/80 text-base leading-relaxed font-jakarta">
+                        Suka mengeksplorasi hal baru, beradaptasi cepat dengan tim, serta selalu membawa estetika dan dedikasi maksimal di setiap tanggung jawab.
+                    </p>
+
+                    <!-- Vibe Badges -->
+                    <div class="mt-8 pt-6 border-t border-zinc-800 flex flex-wrap gap-3">
+                        <span class="bg-zinc-800 text-vintage-cream text-xs px-3 py-1.5 rounded-md font-mono border border-zinc-700">🎯 Target Driven</span>
+                        <span class="bg-zinc-800 text-vintage-cream text-xs px-3 py-1.5 rounded-md font-mono border border-zinc-700">🤝 Team Player</span>
+                        <span class="bg-zinc-800 text-vintage-cream text-xs px-3 py-1.5 rounded-md font-mono border border-zinc-700">⚡ Fast Learner</span>
+                        <span class="bg-zinc-800 text-vintage-cream text-xs px-3 py-1.5 rounded-md font-mono border border-zinc-700">🏆 Championship Mindset</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Skill Badges Column -->
+                <div class="bg-skena-bg p-8 rounded-2xl border-2 border-vintage-cream/30 shadow-brutal-pink flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-syne font-bold text-hot-pink mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-fire"></i> SKILLS & VIBES
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span>TECHNICAL & WORK ETHIC</span>
+                                    <span class="text-acid-lime">95%</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2.5 rounded-full overflow-hidden border border-zinc-700">
+                                    <div class="bg-acid-lime h-full w-[95%]"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span>BADMINTON & ATHLETICISM</span>
+                                    <span class="text-hot-pink">98%</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2.5 rounded-full overflow-hidden border border-zinc-700">
+                                    <div class="bg-hot-pink h-full w-[98%]"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1">
+                                    <span>PROBLEM SOLVING</span>
+                                    <span class="text-electric-blue">90%</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2.5 rounded-full overflow-hidden border border-zinc-700">
+                                    <div class="bg-electric-blue h-full w-[90%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sticker quote -->
+                    <div class="mt-8 bg-acid-lime text-black p-4 rounded-xl border-2 border-black rotate-neg-2 font-syne font-bold text-sm shadow-brutal">
+                        "Work Hard, Play Harder, Stay Kalcer."
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. SECTION PROJECT (1 GAMBAR PROJECT) -->
+    <section id="project" class="py-20 px-4 lg:px-12 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-acid-lime font-mono text-sm uppercase tracking-widest">// SECTION 02</span>
+                <h2 class="font-syne text-4xl md:text-5xl font-extrabold tracking-tight mt-1">
+                    FEATURED PROJECT<span class="text-acid-lime">.</span>
+                </h2>
+            </div>
+            <span class="bg-acid-lime text-black font-extrabold px-3 py-1 rounded text-xs uppercase shadow-brutal rotate-pos-3">
+                1 HIGHLIGHTED WORK
+            </span>
+        </div>
+
+        <!-- Project Single Card Brutalist Frame -->
+        <div class="bg-skena-card border-3 border-vintage-cream rounded-2xl overflow-hidden shadow-brutal-lg transition-all duration-300 hover:border-acid-lime group">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                
+                <!-- Project Image Column -->
+                <div class="lg:col-span-7 bg-zinc-900 relative min-h-[320px] lg:min-h-[450px] overflow-hidden border-b-2 lg:border-b-0 lg:border-r-2 border-vintage-cream/30">
+                    
+                    <!-- 
+                        =========================================================
+                        [INSTRUKSI PEMAKAIAN GAMBAR PROJECT]
+                        Ganti atribut src="..." di bawah ini dengan gambar Project kamu!
+                        Atau klik tombol "Ganti Gambar" di card.
+                        =========================================================
+                    -->
+                    <img id="img-project" 
+                         src="PROJEK.png" 
+                         alt="Gambar Project Utama" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
+                         onclick="openModal(this.src, 'Project Utama Gua')">
+
+                    <!-- Overlay Button for Image Upload -->
+                    
+
+                    <div class="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md text-acid-lime px-3 py-1 rounded font-mono text-xs border border-acid-lime/40">
+                        <i class="fa-solid fa-expand"></i> Klik gambar untuk zoom
+                    </div>
+                </div>
+
+                <!-- Project Info Column -->
+                <div class="lg:col-span-5 p-8 lg:p-10 flex flex-col justify-between space-y-6">
+                    <div>
+                        <div class="flex items-center gap-2 text-hot-pink font-mono text-xs font-bold uppercase mb-2">
+                            <span>MASTERPIECE</span> • <span>FEATURED PROJECT</span>
+                        </div>
+                        <h3 class="font-syne text-3xl font-extrabold text-vintage-cream mb-4">
+                            CREATIVE SHOWCASE PROJECT
+                        </h3>
+                        <p class="text-vintage-cream/80 font-jakarta text-base leading-relaxed mb-6">
+                            Ini adalah project terbaik yang pernah saya selesaikan. Dibuat dengan perhatian tinggi terhadap detail, fungsionalitas, serta tampilan visual modern yang standout.
+                        </p>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="space-y-2">
+                            <span class="text-xs font-mono text-zinc-400 block">TOOLS & TECH STACK:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-zinc-800 text-acid-lime text-xs font-mono px-3 py-1 rounded border border-zinc-700">UI/UX Design</span>
+                                <span class="bg-zinc-800 text-acid-lime text-xs font-mono px-3 py-1 rounded border border-zinc-700">Web Development</span>
+                                <span class="bg-zinc-800 text-acid-lime text-xs font-mono px-3 py-1 rounded border border-zinc-700">Creative Direction</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Links / CTA Buttons -->
+                   
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SECTION PKL (PT CIPTA MANDIRI WIRASAKTI) -->
+    <section id="pkl" class="py-20 px-4 lg:px-12 bg-skena-card border-y-2 border-vintage-cream/20">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <span class="text-acid-lime font-mono text-sm uppercase tracking-widest">// SECTION 03</span>
+                    <h2 class="font-syne text-4xl md:text-5xl font-extrabold tracking-tight mt-1">
+                        PENGALAMAN PKL<span class="text-hot-pink">.</span>
+                    </h2>
+                    <p class="text-acid-lime font-mono text-base font-bold mt-2">
+                        📍 PT CIPTA MANDIRI WIRASAKTI
+                    </p>
+                </div>
+                <div class="bg-hot-pink text-white font-extrabold px-4 py-2 rounded-lg border-2 border-black shadow-brutal rotate-neg-2 text-xs uppercase">
+                    🏭 INDUSTRIAL EXPERIENCE
+                </div>
+            </div>
+
+            <!-- Story Banner -->
+            <div class="bg-skena-bg p-6 rounded-xl border-2 border-vintage-cream/30 mb-10 text-vintage-cream/90 font-jakarta leading-relaxed">
+                <p>
+                    Menjalani Praktik Kerja Lapangan (PKL) di <strong class="text-acid-lime">PT Cipta Mandiri Wirasakti</strong> memberikan pengalaman nyata dalam dunia industri profesional. Belajar kedisiplinan tinggi, kerjasama tim, penyesuaian dengan standar kerja industri, serta menyelesaikan berbagai tugas operasional perusahaan dengan efektif.
+                </p>
+            </div>
+
+            <!-- PKL 2 Images Grid (Sertifikat & Foto Bersama) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Card 1: Sertifikat PKL -->
+                <div class="bg-skena-bg p-5 rounded-2xl border-2 border-vintage-cream/30 shadow-brutal group hover:border-acid-lime transition-all">
+                    
+                    <!-- Image Frame -->
+                    <div class="relative aspect-[4/3] bg-zinc-900 rounded-xl overflow-hidden border-2 border-black mb-5 group/img">
+                        <!-- 
+                            =========================================================
+                            [INSTRUKSI PEMAKAIAN GAMBAR SERTIFIKAT PKL]
+                            Ganti atribut src="..." dengan foto sertifikat PKL kamu!
+                            =========================================================
+                        -->
+                        <img id="img-sertif-pkl" 
+                             src="SERTIF.png" 
+                             alt="Sertifikat PKL PT Cipta Mandiri Wirasakti" 
+                             class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 cursor-pointer"
+                             onclick="openModal(this.src, 'Sertifikat PKL PT Cipta Mandiri Wirasakti')">
+
+                        <!-- Image Control Buttons -->
+                        
+
+                        <span class="absolute bottom-3 left-3 bg-black/80 text-white font-mono text-[10px] px-2 py-1 rounded border border-white/20">
+                            📜 SERTIFIKAT RESMI
+                        </span>
+                    </div>
+
+                    <h3 class="font-syne text-xl font-extrabold text-vintage-cream mb-2">
+                        SERTIFIKAT PKL
+                    </h3>
+                    <p class="text-sm font-jakarta text-vintage-cream/70">
+                        Bukti resmi penyelesaian masa PKL dengan penilaian memuaskan di PT Cipta Mandiri Wirasakti.
+                    </p>
+                </div>
+
+                <!-- Card 2: Foto Bersama PKL -->
+                <div class="bg-skena-bg p-5 rounded-2xl border-2 border-vintage-cream/30 shadow-brutal-pink group hover:border-hot-pink transition-all">
+                    
+                    <!-- Image Frame -->
+                    <div class="relative aspect-[4/3] bg-zinc-900 rounded-xl overflow-hidden border-2 border-black mb-5 group/img">
+                        <!-- 
+                            =========================================================
+                            [INSTRUKSI PEMAKAIAN FOTO BERSAMA PKL]
+                            Ganti atribut src="..." dengan foto kebersamaan PKL kamu!
+                            =========================================================
+                        -->
+                        <img id="img-bersama-pkl" 
+                             src="PKL.jpeg" 
+                             alt="Foto Bersama PKL PT Cipta Mandiri Wirasakti" 
+                             class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 cursor-pointer"
+                             onclick="openModal(this.src, 'Foto Bersama di PT Cipta Mandiri Wirasakti')">
+
+                        <!-- Image Control Buttons -->
+                       
+
+                        <span class="absolute bottom-3 left-3 bg-black/80 text-white font-mono text-[10px] px-2 py-1 rounded border border-white/20">
+                            👥 MENTOR & TEAM MOMENT
+                        </span>
+                    </div>
+
+                    <h3 class="font-syne text-xl font-extrabold text-vintage-cream mb-2">
+                        FOTO BERSAMA MENTOR & REKAN PKL
+                    </h3>
+                    <p class="text-sm font-jakarta text-vintage-cream/70">
+                        Dokumentasi kebersamaan bersama pembimbing industri dan teman seperjuangan di PT Cipta Mandiri Wirasakti.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. SECTION PRESTASI / ACHIEVEMENT (2 GAMBAR PRESTASI BADMINTON) -->
+    <section id="prestasi" class="py-20 px-4 lg:px-12 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="text-acid-lime font-mono text-sm uppercase tracking-widest">// SECTION 04</span>
+                <h2 class="font-syne text-4xl md:text-5xl font-extrabold tracking-tight mt-1">
+                    PRESTASI BADMINTON<span class="text-acid-lime">.</span>
+                </h2>
+                <p class="text-vintage-cream/70 font-mono text-sm mt-1">
+                    Juara POSMAD Badminton Level Kecamatan & Kabupaten.
+                </p>
+            </div>
+            <div class="inline-flex items-center gap-2 bg-acid-lime text-black font-syne font-extrabold px-4 py-2 rounded-lg border-2 border-black shadow-brutal">
+                <i class="fa-solid fa-trophy text-lg"></i>
+                <span>CHAMPION BADMINTON</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Card Prestasi 1: Kecamatan -->
+            <div class="bg-skena-card p-6 rounded-2xl border-3 border-vintage-cream shadow-brutal-lg transition-all hover:border-acid-lime">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <span class="bg-acid-lime text-black font-syne font-extrabold text-xs px-3 py-1 rounded-md border border-black shadow-brutal">
+                        🥇 JUARA 1
+                    </span>
+                    <span class="text-xs font-mono text-zinc-400">POSMAD KECAMATAN</span>
+                </div>
+
+                <!-- Image Frame -->
+                <div class="relative aspect-[4/3] bg-zinc-900 rounded-xl overflow-hidden border-2 border-black mb-5 group/img">
+                    <!-- 
+                        =========================================================
+                        [INSTRUKSI PEMAKAIAN GAMBAR JUARA KECAMATAN]
+                        Ganti atribut src="..." dengan foto piala/sertifikat Juara 1 Kecamatan!
+                        =========================================================
+                    -->
+                    <img id="img-prestasi-kecamatan" 
+                         src="KEC.jpeg" 
+                         alt="Juara 1 POSMAD Kecamatan Badminton" 
+                         class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 cursor-pointer"
+                         onclick="openModal(this.src, 'Juara 1 POSMAD Tingkat Kecamatan (Badminton)')">
+
+                    <!-- Image Control Buttons -->
+                    
+                    <div class="absolute bottom-3 left-3 bg-black/80 text-acid-lime font-mono text-[10px] px-2.5 py-1 rounded border border-acid-lime/30">
+                        🏸 BADMINTON CHAMPIONSHIP
+                    </div>
+                </div>
+
+                <h3 class="font-syne text-2xl font-extrabold text-vintage-cream mb-2">
+                    JUARA 1 POSMAD TINGKAT KECAMATAN
+                </h3>
+                <p class="text-sm font-jakarta text-vintage-cream/80 leading-relaxed">
+                    Berhasil merebut gelar Podium Utama (Juara 1) pada Pekan Olahraga dan Seni Madrasah (POSMAD) cabang olahraga Badminton tingkat Kecamatan.
+                </p>
+            </div>
+
+            <!-- Card Prestasi 2: Kabupaten -->
+            <div class="bg-skena-card p-6 rounded-2xl border-3 border-vintage-cream shadow-brutal-lg-pink transition-all hover:border-hot-pink">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <span class="bg-hot-pink text-white font-syne font-extrabold text-xs px-3 py-1 rounded-md border border-black shadow-brutal">
+                        🏆 JUARA 1
+                    </span>
+                    <span class="text-xs font-mono text-zinc-400">POSMAD KABUPATEN</span>
+                </div>
+
+                <!-- Image Frame -->
+                <div class="relative aspect-[4/3] bg-zinc-900 rounded-xl overflow-hidden border-2 border-black mb-5 group/img">
+                    <!-- 
+                        =========================================================
+                        [INSTRUKSI PEMAKAIAN GAMBAR JUARA KABUPATEN]
+                        Ganti atribut src="..." dengan foto piala/sertifikat Juara 1 Kabupaten!
+                        =========================================================
+                    -->
+                    <img id="img-prestasi-kabupaten" 
+                         src="KAB.jpeg" 
+                         alt="Juara 1 POSMAD Tingkat Kabupaten Badminton" 
+                         class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500 cursor-pointer"
+                         onclick="openModal(this.src, 'Juara 1 POSMAD Tingkat Kabupaten (Badminton)')">
+
+                    <!-- Image Control Buttons -->
+                    
+                    <div class="absolute bottom-3 left-3 bg-black/80 text-hot-pink font-mono text-[10px] px-2.5 py-1 rounded border border-hot-pink/30">
+                        🥇 HIGHEST REGIONAL TITLE
+                    </div>
+                </div>
+
+                <h3 class="font-syne text-2xl font-extrabold text-vintage-cream mb-2">
+                    JUARA 1 POSMAD TINGKAT KABUPATEN
+                </h3>
+                <p class="text-sm font-jakarta text-vintage-cream/80 leading-relaxed">
+                    Melanjutkan konsistensi kemenangan hingga berhasil meraih posisi Juara 1 POSMAD Badminton tingkat Kabupaten setelah melewati kompetisi sengit.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. MODAL IMAGE ZOOM (POPUP PREVIEW) -->
+    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-md p-4 md:p-10 flex flex-col justify-between items-center transition-opacity duration-300">
+        
+        <!-- Top Bar Modal -->
+        <div class="w-full max-w-5xl flex justify-between items-center z-10">
+            <span id="modalCaption" class="font-syne text-acid-lime font-bold text-lg md:text-xl">
+                PREVIEW GAMBAR
+            </span>
+            <button onclick="closeModal()" class="bg-hot-pink hover:bg-white text-white hover:text-black font-extrabold px-4 py-2 rounded-lg border-2 border-white shadow-brutal transition-all text-sm">
+                <i class="fa-solid fa-xmark"></i> TUTUP [ESC]
+            </button>
+        </div>
+
+        <!-- Center Image Display -->
+        <div class="my-auto max-w-5xl max-h-[75vh] p-2 bg-vintage-cream rounded-2xl border-4 border-black shadow-brutal-lg overflow-hidden">
+            <img id="modalImg" src="" alt="Modal Zoom" class="max-w-full max-h-[70vh] object-contain mx-auto rounded-lg">
+        </div>
+
+        <!-- Bottom Helper Text -->
+        <p class="text-xs font-mono text-zinc-400">Klik di luar atau tombol TUTUP untuk kembali</p>
+    </div>
+
+    <!-- 7. FOOTER & CONTACT SECTION -->
+    <footer id="contact" class="bg-black pt-16 pb-12 border-t-4 border-acid-lime relative overflow-hidden">
+        
+        <!-- Marquee Bottom Banner -->
+        <div class="bg-hot-pink text-white font-syne font-extrabold text-sm py-2 mb-12 overflow-hidden border-y-2 border-white -rotate-1">
+            <div class="whitespace-nowrap flex animate-marquee-reverse gap-8">
+                <span>LET'S CONNECT AND WORK TOGETHER</span>
+                <span>•</span>
+                <span>OPEN FOR OPPORTUNITIES</span>
+                <span>•</span>
+                <span>SEND ME A MESSAGE</span>
+                <span>•</span>
+                <span>SKENA VIBES ONLY</span>
+                <span>•</span>
+                <span>LET'S CONNECT AND WORK TOGETHER</span>
+                <span>•</span>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pb-12 border-b border-zinc-800">
+                
+                <div class="lg:col-span-8 space-y-4">
+                    <h2 class="font-syne text-4xl sm:text-6xl font-extrabold text-vintage-cream tracking-tight">
+                        PUNYA PROJECT ATAU <br>
+                        <span class="text-acid-lime">PELUANG KERJA?</span>
+                    </h2>
+                    <p class="text-vintage-cream/70 font-jakarta text-lg max-w-xl">
+                        Jangan ragu buat sapa gua. Siap berkontribusi dengan etos kerja tinggi dan semangat juara!
+                    </p>
+                </div>
+
+                <div class="lg:col-span-4 flex flex-col gap-4">
+                    <a href="mailto:icecoldkyy@gmai.com" class="bg-acid-lime hover:bg-white text-black font-syne font-extrabold text-center text-lg py-4 px-6 rounded-xl border-2 border-black shadow-brutal transition-all">
+                        📧 SEND AN EMAIL
+                    </a>
+                    <a href="https://wa.me/625714387918" target="_blank" class="bg-skena-card hover:bg-zinc-800 text-vintage-cream font-syne font-extrabold text-center text-lg py-4 px-6 rounded-xl border-2 border-vintage-cream shadow-brutal-white transition-all">
+                        💬 WHATSAPP ME
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+                
+
+                <!-- Copyright Text -->
+                <p class="font-mono text-xs text-zinc-500 text-center sm:text-right">
+                    © 2026 SKENA PORTFOLIO. BUATAN ANAK KALCER. ALL RIGHTS RESERVED.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT LOGIC & INTERACTIVITY -->
+    <script>
+        // Track targeted image ID for upload
+        let currentTargetImgId = null;
+
+        // Trigger hidden file picker input
+        function triggerFileInput(targetImgId) {
+            currentTargetImgId = targetImgId;
+            document.getElementById('globalFileInput').click();
+        }
+
+        // Handle File Selection and update image element
+        function handleFileSelected(event) {
+            const file = event.target.files[0];
+            if (file && currentTargetImgId) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElem = document.getElementById(currentTargetImgId);
+                    if (imgElem) {
+                        imgElem.src = e.target.result;
+                        showNotification("Berhasil memperbarui gambar!");
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Option to change Image via URL prompt
+        function promptImageUrl(targetImgId) {
+            const currentSrc = document.getElementById(targetImgId).src;
+            const newUrl = prompt("Masukkan URL Gambar baru (http:// / https://):", currentSrc);
+            if (newUrl && newUrl.trim() !== "") {
+                document.getElementById(targetImgId).src = newUrl.trim();
+                showNotification("URL Gambar berhasil diubah!");
+            }
+        }
+
+        // Modal Zoom Handler
+        function openModal(imgSrc, captionText) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalCaption = document.getElementById('modalCaption');
+
+            modalImg.src = imgSrc;
+            modalCaption.innerText = captionText || "PREVIEW GAMBAR";
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close Modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close Modal when clicking outside the modal content
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Toast Notification Helper
+        function showNotification(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 z-50 bg-acid-lime text-black font-syne font-bold px-4 py-3 rounded-lg border-2 border-black shadow-brutal transition-all transform translate-y-0 opacity-100';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
